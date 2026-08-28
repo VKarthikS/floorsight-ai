@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your preview | FloorSight</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('index') }}" aria-label="FloorSight home">
+      <span class="brand-mark" aria-hidden="true">FS</span>
+      <span>FloorSight</span>
+    </a>
+    <span class="header-note">Independent portfolio prototype</span>
+  </header>
+
+  <main class="result-page">
+    <section class="result-heading">
+      <p class="eyebrow">Preview ready</p>
+      <h1>Review your flooring concept.</h1>
+      <p>{{ room_name }} with {{ floor_name }}, rendered using {{ render_mode }}.</p>
+    </section>
+
+    <figure class="result-image">
+      <img src="{{ output_url }}" alt="Generated room preview using {{ floor_name }} flooring">
+      <figcaption>This visualization is illustrative. Confirm physical samples before purchase or installation.</figcaption>
+    </figure>
+
+    <div class="result-actions">
+      <a class="primary-button" href="{{ output_url }}" download="floorsight-preview.jpg">Download preview</a>
+      <a class="secondary-button" href="{{ url_for('index') }}">Try another room</a>
+    </div>
+  </main>
+</body>
+</html>

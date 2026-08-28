@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Preview error | FloorSight</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body>
+  <main class="error-page">
+    <p class="eyebrow">Request not completed</p>
+    <h1>We could not create this preview.</h1>
+    <p>{{ message }}</p>
+    <a class="primary-button" href="{{ url_for('index') }}">Return to visualizer</a>
+  </main>
+</body>
+</html>

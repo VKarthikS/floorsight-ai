@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Preview flooring materials in a room photo using local image processing or Gemini AI.">
+  <title>FloorSight | Flooring visualizer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('index') }}" aria-label="FloorSight home">
+      <span class="brand-mark" aria-hidden="true">FS</span>
+      <span>FloorSight</span>
+    </a>
+    <span class="header-note">Independent portfolio prototype</span>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">AI-assisted room preview</p>
+        <h1 id="page-title">See the floor before installation.</h1>
+        <p class="lede">Choose a room and material. Generate a quick local concept or use Gemini for a realistic edit.</p>
+      </div>
+      <img src="{{ url_for('static', filename='rooms/rustic-kitchen.jpg') }}" alt="Kitchen with wood flooring" width="1054" height="791">
+    </section>
+
+    {% if error %}
+      <div class="alert" role="alert"><strong>Could not create preview.</strong> {{ error }}</div>
+    {% endif %}
+
+    <form class="visualizer" action="{{ url_for('edit') }}" method="post" enctype="multipart/form-data" data-visualizer-form>
+      <section class="step" aria-labelledby="room-heading">
+        <div class="step-heading">
+          <span class="step-index" aria-hidden="true">1</span>
+          <div>
+            <h2 id="room-heading">Choose a room</h2>
+            <p>Select a sample or upload a JPG, PNG, or WebP image up to 12 MB.</p>
+          </div>
+        </div>
+
+        <label class="upload-zone" for="room-upload">
+          <span class="upload-title">Upload your room photo</span>
+          <span class="upload-help">The image stays on this server only for processing.</span>
+          <input id="room-upload" type="file" name="room" accept="image/jpeg,image/png,image/webp" data-room-upload>
+        </label>
+        <div class="upload-preview" data-upload-preview hidden>
+          <img alt="Preview of uploaded room" data-upload-preview-image>
+          <button type="button" class="text-button" data-clear-upload>Remove upload</button>
+        </div>
+
+        <fieldset>
+          <legend>Or select a sample room</legend>
+          <div class="choice-grid rooms-grid">
+            {% for filename, label in rooms %}
+              <label class="image-choice">
+                <input type="radio" name="demo_room" value="{{ filename }}" {% if loop.first %}checked{% endif %}>
+                <img src="{{ url_for('static', filename='rooms/' + filename) }}" alt="{{ label }} sample room" loading="lazy">
+                <span>{{ label }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="step" aria-labelledby="floor-heading">
+        <div class="step-heading">
+          <span class="step-index" aria-hidden="true">2</span>
+          <div>
+            <h2 id="floor-heading">Select a flooring material</h2>
+            <p>The reference texture guides color, grain, and plank character.</p>
+          </div>
+        </div>
+        <fieldset>
+          <legend class="sr-only">Flooring choices</legend>
+          <div class="choice-grid floors-grid">
+            {% for filename, label in floors %}
+              <label class="image-choice">
+                <input type="radio" name="floor_choice" value="{{ filename }}" {% if loop.first %}checked{% endif %} required>
+                <img src="{{ url_for('static', filename='floors/' + filename) }}" alt="{{ label }} flooring texture" loading="lazy">
+                <span>{{ label }}</span>
+              </label>
+            {% else %}
+              <p class="empty-state">No flooring textures are available.</p>
+            {% endfor %}
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="step render-step" aria-labelledby="render-heading">
+        <div class="step-heading">
+          <span class="step-index" aria-hidden="true">3</span>
+          <div>
+            <h2 id="render-heading">Create the preview</h2>
+            <p>Local mode runs immediately. Gemini mode requires a configured API key.</p>
+          </div>
+        </div>
+        <fieldset class="mode-picker">
+          <legend class="sr-only">Rendering mode</legend>
+          <label>
+            <input type="radio" name="render_mode" value="local" checked>
+            <span><strong>Local preview</strong><small>Fast compositing for a working demonstration</small></span>
+          </label>
+          <label class="{% if not gemini_ready %}is-disabled{% endif %}">
+            <input type="radio" name="render_mode" value="gemini" {% if not gemini_ready %}disabled{% endif %}>
+            <span><strong>Gemini AI</strong><small>{% if gemini_ready %}Generative room editing{% else %}Add GEMINI_API_KEY to enable{% endif %}</small></span>
+          </label>
+        </fieldset>
+        <button class="primary-button" type="submit" data-submit>
+          <span data-submit-label>Create preview</span>
+        </button>
+        <p class="processing-note" data-processing-note hidden>Preparing the room and flooring images. Keep this page open.</p>
+      </section>
+    </form>
+  </main>
+
+  <footer>
+    <p>Concept previews are illustrative and may differ from installed materials.</p>
+  </footer>
+</body>
+</html>

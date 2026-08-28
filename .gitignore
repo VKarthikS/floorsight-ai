@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Generated files
+outputs/
+static/outputs/
+*.log
+
+# Models and large archives
+*.pt
+*.pth
+*.ckpt
+*.zip
+*.rar
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+~$*
