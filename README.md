@@ -1,6 +1,6 @@
 # FloorSight
 
-FloorSight is an independent portfolio prototype for previewing flooring materials in room photographs. It restores and organizes an archived AI visualization project into a reproducible repository.
+FloorSight is an independent AI-assisted portfolio project by Venkata Karthik Samula for previewing flooring materials in room photographs.
 
 > This project is not affiliated with or endorsed by Home Depot or any other retailer.
 
@@ -40,13 +40,13 @@ Result and download page
 ```text
 apps/
   flask-gemini/       Working interactive prototype
-  gcs-gemini/         Archived Google Cloud Storage batch prototype
+  gcs-gemini/         Exploratory Google Cloud Storage batch prototype
 experiments/
   sam2-openai/        Incomplete segmentation and compositing experiment
 docs/
   architecture/       Original architecture diagrams
   project-notes/      Sanitized project overview
-archive-manifest.md   Material intentionally excluded from Git
+docs/PROJECT_SCOPE.md Included components and project boundaries
 ```
 
 ## Run locally
@@ -92,7 +92,7 @@ The test suite covers page rendering, local image generation, invalid uploads, a
 
 Local preview is a deterministic demonstration, not photorealistic floor segmentation. It applies a texture to an approximate lower-room mask. Gemini mode can produce more realistic results, but generative output is probabilistic and may modify objects outside the requested floor region.
 
-The GCS and SAM2 folders document approaches explored in the archive. They are not represented as production-ready components.
+The GCS and SAM2 folders document additional approaches explored during development. They are not represented as production-ready components.
 
 ## Security and privacy
 
