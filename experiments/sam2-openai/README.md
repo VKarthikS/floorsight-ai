@@ -1,4 +1,4 @@
-# SAM2 + OpenAI experiment
+# OpenAI experiment
 
 This incomplete experiment separates the workflow into floor segmentation, reference analysis, and texture compositing. It is retained to document the explored architecture, not as a runnable application.
 
