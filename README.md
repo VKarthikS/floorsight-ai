@@ -4,7 +4,7 @@ FloorSight is an independent portfolio prototype for previewing flooring materia
 
 > This project is not affiliated with or endorsed by Home Depot or any other retailer.
 
-![A sample kitchen used by the visualizer](apps/flask-gemini/static/rooms/rustic-kitchen.jpg)
+![A white oak flooring preview generated for the project](docs/media/white-oak-preview.png)
 
 ## What works
 
@@ -105,3 +105,7 @@ The GCS and SAM2 folders document approaches explored in the archive. They are n
 ## Responsible use
 
 Generated previews are illustrative and may differ from physical materials after installation. Confirm flooring with a real sample under the room's lighting before purchase.
+
+## Asset provenance
+
+The room, flooring textures, and example output included in the public repository were generated specifically for this portfolio project. See [ASSET_PROVENANCE.md](docs/ASSET_PROVENANCE.md) for the asset inventory and generation notes.

@@ -15,6 +15,9 @@ venv/
 outputs/
 static/outputs/
 *.log
+/output/
+/release/
+/tmp/
 
 # Models and large archives
 *.pt
